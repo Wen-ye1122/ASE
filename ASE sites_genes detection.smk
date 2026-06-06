@@ -68,6 +68,20 @@ rule paired_phASER_ASE:
                 ```
                 python2 /phaser-master/phaser_gene_ae/phaser_gene_ae.py \
                     --haplotypic_counts {input.haplotype_count} \
-                    --features Sus_scrofa.Sscrofa11.1.100.gene.phaser.bed \
+                    --features {input.features} \
                     --o {sample}_phaser.gene_ae.txt
+                ```
+# 3. Aggregates gene-level haplotypic expression measurement files
+    rule aggr_gene_level_expr:
+        shell:
+            '''
+            #phASER-pop
+            #Aggregates gene-level haplotypic expression measurement files across samples to produce a single haplotypic expression matrix, where each row is a gene and each column is a sample
+            python2 /phaser-master/phaser_pop/phaser_expr_matrix.py \
+                --gene_ae_dir path/{sample}_phaser.gene_ae.txt\ # the path contains all sample's phaser.gene_ae.txt
+                --features Sus_scrofa.Sscrofa11.1.100.gene.phaser.bed \
+                --t 5 \
+            ```
+            --o phaser_expr.7008
+        '''
         
