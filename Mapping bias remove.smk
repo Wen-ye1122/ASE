@@ -10,7 +10,7 @@ STAR_GENOME = "star-genome"
 
 rule all:
     input:
-        expand("results/{sample}/dedupped_{sample}.uniq.WASP.bam", sample=PAIRED_SAMPLES + SINGLE_SAMPLES)
+        expand(sample=PAIRED_SAMPLES + SINGLE_SAMPLES)
 
 # 1. extract and filter individual imputed genotype from population-level imputed genotype data 
 rule extract_individual_imputed_vcf::
