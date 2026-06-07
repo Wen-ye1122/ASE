@@ -84,4 +84,16 @@ rule paired_phASER_ASE:
             ```
             --o phaser_expr.7008
         '''
+# 4. filter
+    rule filter_ASE_sites
+        input:
+            raw.ASE = "results/{sample}/{sample}.allelic_counts.txt
+        output: 
+            filter.ASE = "result/filter/{sample}.filter.sites"
+        shell:
+            ```
+            awk 'NR >=2 && $8>=15 && $6>2 && $7 >2 && $6/$8> 0.02 && $6/$8 < 0.98 {print $1,$2,$4,$5,$6,$7,$8,$6/$8}' OFS="\t" results/{sample}/{sample}.allelic_counts.txt > {output.filter.ASE}
+            ```
+# 5. binom test
+    Rscript binomal.ASE.r 
         
