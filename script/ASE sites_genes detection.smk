@@ -1,13 +1,19 @@
-paired_sample= ["SAMEA103939830", "SAMEA4436905"] # example sample id
-single_sample = ["aa","bb"]
-haplo_count_blacklit = " " 
+PAIRED_SAMPLES = ["SAMEA103939830", "SAMEA4436905"] # example sample id
+SINGLE_SAMPLES = ["aa","bb"]
+SAMPLES = PAIRED_SAMPLES + SINGLE_SAMPLES
+
+PHASER = "/path/to/phASER/phaser.py"
+PHASER_GENE_AE = "/path/to/phaser_gene_ae.py"
+BINOM_R = "binomial.ASE.r"
+
+FEATURES = "Sus_scrofa.Sscrofa11.1.100.gene.phaser.bed"
+HAPLO_COUNT_BLACKLIST = ""   # keep "" if not used
 # BED file containing genomic intervals to be excluded from haplotypic counts. Reads from any variants which lie within these regions will not be counted for haplotypic counts.
-phASER_dir = "path/to/phASER", # Path to STAR,
-VCF = "results/{sample}/selected.{sample}.filtered.imputed.vcf.gz",
-BAM = "results/{sample}/dedupped_{sample}.uniq.WASP.bam"
+
 rule all:
     input:
-        expand("results/{sample}/dedupped_{sample}.uniq.WASP.bam", sample=PAIRED_SAMPLES + SINGLE_SAMPLES)
+        expand("results/{sample}/{sample}.RNAim.ASE.sites", sample=SAMPLES),
+        "results/phaser_expr.7008.done"
         
 # 1. ASE sites detection using phaser (python2 is needed)
 rule paired_phASER_ASE:
