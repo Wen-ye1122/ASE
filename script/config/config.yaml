@@ -1,0 +1,8 @@
+phaser: "/path/to/phASER/phaser.py"
+phaser_gene_ae: "/path/to/phaser_gene_ae.py"
+phaser_expr_matrix: "/path/to/phaser_expr_matrix.py"
+
+features: "Sus_scrofa.Sscrofa11.1.100.gene.phaser.bed"
+haplo_count_blacklist: ""
+
+threads_phaser: 5
